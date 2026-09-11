@@ -1,0 +1,25 @@
+# Python 3.13.9
+#
+# Pip equivalents of environment.yml, which is the primary specification — the reported
+# results were produced under conda. Use this only if conda is unavailable, and expect the
+# neural network results to move: the conda build was CPU-only OpenBLAS on Apple Silicon,
+# and pip wheels may link a different linear algebra backend.
+#
+# NOTE: pyEDM is deliberately absent. An external cross-check of the CCM estimator against
+# pyEDM was implemented as Test 4 of tests/validate_ccm.py, but the package was unavailable
+# in the run environment and the test printed "skipped". It was never installed and does not
+# belong in a reproducibility statement. See the technical appendix, section 9.
+
+numpy==2.3.5
+pandas==2.3.3
+scipy==1.16.3
+statsmodels==0.14.5
+scikit-learn==1.7.2
+xarray==2026.4.0
+netCDF4==1.7.4
+matplotlib==3.10.6
+openpyxl==3.1.5
+torch==2.10.0
+jupyter==1.1.1
+jupyterlab==4.4.7
+nbconvert==7.16.6
