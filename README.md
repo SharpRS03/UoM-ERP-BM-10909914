@@ -71,8 +71,8 @@ than generated.
 Python 3.13.9, managed with conda:
 
 ```bash
-git clone https://github.com/<USERNAME>/<REPO>.git
-cd <REPO>
+git clone https://github.com/SharpRS03/UoM-ERP-BM-10909914.git
+cd UoM-ERP-BM-10909914
 conda env create -f environment.yml
 conda activate aglakes
 ```
