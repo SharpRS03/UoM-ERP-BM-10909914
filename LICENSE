@@ -19,3 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+The derived data products in Code Outputs/ and the reference outputs alongside
+them are released under the Creative Commons Attribution 4.0 International
+Licence (CC BY 4.0). Redistribution of the underlying source data from C3S,
+G-REALM, DAHITI, ERA5 and NOAA PSL is governed by each provider's own terms;
+none of that source data is redistributed here.
