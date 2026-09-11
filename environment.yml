@@ -1,0 +1,34 @@
+# Conda environment as used to produce the reported results.
+#
+#   conda env create -f environment.yml
+#   conda activate aglakes
+#
+# Channel order matters: xarray came from conda-forge, everything else from the
+# Anaconda default channel.
+#
+
+name: aglakes
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.13.9
+  - numpy=2.3.5
+  - pandas=2.3.3
+  - scipy=1.16.3
+  - statsmodels=0.14.5
+  - scikit-learn=1.7.2
+  - netcdf4=1.7.4
+  - matplotlib=3.10.6
+  - openpyxl=3.1.5
+  - jupyter=1.1.1
+  - jupyterlab=4.4.7
+  - nbconvert=7.16.6
+  # PyTorch: CPU-only OpenBLAS build on Apple Silicon (arm64). No CUDA, no Metal.
+  # The exact build used was cpu_openblas_py313h355ee32_1. Linear algebra backend and
+  # thread count both affect floating-point summation order, which is the mechanism behind
+  # the neural network's seed sensitivity.
+  - pytorch=2.10.0
+  - conda-forge::xarray=2026.4.0
