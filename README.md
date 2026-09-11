@@ -8,19 +8,19 @@ the East African Rift from three satellite radar altimetry repositories, recover
 dependence network between them using Convergent Cross Mapping (CCM), and tests whether that
 network carries transferable forecasting information against calibrated null controls.
 
-This repository is the reproducibility package for that report. It contains every notebook,
-module and reference output needed to regenerate the reported results, and nothing that does not
-serve that purpose.
+This repository is the reproducibility package for that report. It contains every notebook
+and module needed to regenerate the reported results, a reference copy of the outputs behind
+every figure and table the report cites, and nothing that does not serve that purpose.
 
 ---
 
 ## Layout
 
-The repository root is the project directory. Notebooks read their inputs with paths relative
+The repository root *is* the project directory. Notebooks read their inputs with paths relative
 to it — `Grealm Data/…`, `Code Outputs/…`, `Climate Indices/…` — so they run from here, with the
 imported modules beside them. They are deliberately not split into `src/` and `notebooks/`
 subfolders: moving them would change their working directory and break every one of those
-relative paths. The numbering carries the run order.
+relative paths, not merely the two module imports. The numbering carries the run order.
 
 ```
 00_collate_victoria_tanganyika.ipynb   …   22_study_area_map.ipynb
@@ -28,22 +28,18 @@ ccm_core.py            imported by stage 10
 gnarx_core.py          imported by stage 16
 forecast_gnarx.py      imported by stage 16
 
-validate_ccm.ipynb     estimator validation, outside the run order
-validate_gnarx.ipynb   estimator validation, outside the run order
-
 Grealm Data/           not redistributed — download here
 Copernicus Data/       not redistributed — download here
-DAHITI Data/           not redistributed — download here
 Climate Indices/       committed: dmi.csv, nino34.csv
-Code Outputs/          committed: every table and figure cited in the report,
-                       organised by stage, including the four derived .xlsx products
+
+Code Outputs/          NOT committed. Every stage writes here; created on the first run
+Reference Outputs/     committed supporting material — the authors' own results,
+                       in the same subfolder layout as Code Outputs/
 
 docs/                  technical appendix, pipeline schematic, data instructions
 environment.yml        the conda environment as used
-verify_outputs.py      compares a reproduction against the committed outputs
+requirements.txt       equivalent pip pins
 ```
-
-The run order groups into five bands:
 
 | Stages | What happens |
 |---|---|
@@ -51,16 +47,25 @@ The run order groups into five bands:
 | `06`–`09` | Exploratory analysis — STL, stationarity, trends, PCA, and the climate stock-versus-flux contrast |
 | `10` | Dependence — the CCM network, four preprocessing variants, 200 surrogates |
 | `11`–`19` | Forecasting — univariate baselines, VAR/VARX, SARIMAX, the graph neural network, GNAR/GNARX, and both calibrated nulls |
-| `20`–`22` | Reported output — scale-free metrics, the report figures, the study area map |
+| `20`, `21`, `22` | Reported output — scale-free metrics, the report figures, the study area map |
 
+### Why there are two output folders
 
-`Code Outputs/` holds the authors' own results, organised by stage. It is mostly a reference, but
-not purely: four derived products live inside it and later stages read them from there —
-`Lake Level Outputs/African_Great_Lakes_Water_Levels.xlsx`,
-`Fusion Outputs/Unified_BiasAligned_Levels.xlsx`,
-`Gap Interpolation Outputs/Unified_Interpolated_Levels.xlsx` and
-`Climate Data Extraction Outputs/Lake_Climate_Monthly.xlsx`. That is why it is committed rather
-than generated.
+Every stage writes into `Code Outputs/`, which is not committed, a fresh clone does not have
+it, and the notebooks create it on the first run. `Reference Outputs/` holds the authors' own
+copies of the same files, under the same subfolder names, and nothing in the pipeline ever reads
+it.
+
+They are kept apart for one reason: a committed copy sitting at the path a stage writes to would
+be overwritten by the first run and would be worth nothing as a comparison. Separating them means
+you can run the whole pipeline and still have the original numbers to check against.
+
+`Reference Outputs/` is **supporting material**. It contains the file
+behind each numbered figure and table in the report, the file behind each reported quantity given
+in the report's prose, and the four derived data products listed below — the set named in the
+technical appendix's provenance map (§7), and no more. A full run writes considerably more than
+this; none of the rest is committed, because material that does not support a reported result
+makes the package harder to navigate.
 
 ---
 
@@ -77,25 +82,26 @@ conda env create -f environment.yml
 conda activate aglakes
 ```
 
-`requirements.txt` carries equivalent pip pins if conda is unavailable. The neural network ran on a CPU-only
+`requirements.txt` carries equivalent pip pins if conda is unavailable, but `environment.yml` is
+the specification the reported results were produced under. The neural network ran on a CPU-only
 OpenBLAS build of PyTorch 2.10.0 on Apple Silicon — no CUDA, no Metal. Linear algebra backend and
 thread count both affect floating-point summation order, so a different build will move those
 results even with identical seeds. Stage 16 pins all BLAS thread counts to 1 for the same reason;
 leave that pinning in place.
 
-Exact versions, hardware: `docs/TECHNICAL_APPENDIX.pdf` §4.
+Exact versions and hardware: `docs/TECHNICAL_APPENDIX.pdf` §4.
 
 ### 2. Data
 
-The raw altimetry and reanalysis inputs are public but are **not redistributed here**.
-`docs/DATA.md` gives the source of each product, the exact ERA5 request, and the folder names the
-notebooks expect.
+Only two folders need populating, and the raw inputs for both are public but **not redistributed
+here**. `docs/DATA.md` gives the source of each product, the exact ERA5 request, the per-lake
+target identifiers, and the folder and file names the notebooks expect.
 
-Four derived products **are** committed, all inside `Code Outputs/`. A reproducer can regenerate
-them from the raw downloads or start from the committed copies — the second route is recommended
-for a first pass, because the altimetry archives are periodically reprocessed and the ERA5 daily
-product is recomputed on every retrieval, so a download made today may not be byte-identical to
-the one used here.
+Two small things are committed: the two climate index series under `Climate Indices/`, and,
+inside the notebooks rather than in a data folder, the DAHITI water-level records. All five
+DAHITI series are embedded as literal values in stages `00` and `01`, so there is no DAHITI
+download, no DAHITI folder, and no account needed. The `<Lake>_DAHITI.xlsx` files are outputs
+of stage `01`, not inputs to it.
 
 ### 3. Run order
 
@@ -107,46 +113,46 @@ for nb in [0-9][0-9]_*.ipynb; do
 done
 ```
 
-To skip the record construction and go straight to the modelling, start at `06_eda.ipynb` —
-everything from there reads the committed products inside `Code Outputs/`.
+To skip the record construction and start at `06_eda.ipynb`, copy the reference outputs across
+first — stages `06` onward read from `Code Outputs/`, not from `Reference Outputs/`:
+
+```bash
+mkdir -p "Code Outputs" && cp -r "Reference Outputs/." "Code Outputs/"
+```
+
+The two files that matter for this are
+`Gap Interpolation Outputs/Unified_Interpolated_Levels.xlsx` and
+`Climate Data Extraction Outputs/Lake_Climate_Monthly.xlsx`; copying the whole set is simply
+easier than picking them out.
 
 Stage 20 must run after every forecasting stage and before the figures: it is the post-processor
 that adds the nRMSE and MASE columns, and every scale-free number in the report comes from it. It
 skips any metrics file it cannot find rather than failing, so an out-of-order run fails quietly.
 
-Full stage table with inputs, parameters and runtimes: `docs/TECHNICAL_APPENDIX.pdf` §5.
+Full stage table with inputs and parameters: `docs/TECHNICAL_APPENDIX.pdf` §5.
 
-### 4. Verifying the reproduction
+### 4. Checking a reproduction
 
-Because the committed outputs sit in the working tree, git itself is the first check. After a run:
+Compare your `Code Outputs/` against the committed `Reference Outputs/`. The provenance map in
+`docs/TECHNICAL_APPENDIX.pdf` §7 names the file behind every reported figure, table and quoted
+number, so any result in the report can be traced to a single file and checked directly.
 
-```bash
-git status --short "Code Outputs"     # any file listed did not reproduce byte-for-byte
-```
-
-A few diagnostic figures and duplicate metrics files that no reported result uses are listed in
-`.gitignore`, so a correct run reports a clean status rather than a list of untracked extras.
-
-For a numeric comparison with a tolerance, clone a second, pristine copy and diff against it:
-
-```bash
-git clone https://github.com/SharpRS03/<REPO>.git reference
-python verify_outputs.py reference/"Code Outputs" "Code Outputs"
-```
+Three stages are expected to differ on different hardware — `15`, `18` and `19`, the neural
+network and its two null suites. `docs/TECHNICAL_APPENDIX.pdf` §8.1 states what agreement to
+expect from every stage, and §8 lists each place a difference is expected and why.
 
 ---
 
-## Seven things a reproducer needs to know before starting
+## Six things a reproducer needs to know before starting
 
 **Three different graphs appear in this project, and the one the report describes is not the one
-the models use.** The 19-edge robust core in `Code Outputs/CCM Outputs/CCM_12_robust_core.csv` is
-the reported characterisation of the network, the degree structure, the in-degree-of-zero
-result. The graph the forecasting stages actually read is the 20-edge top-3 adjacency in
+the models use.** The 19-edge robust core in `CCM Outputs/CCM_12_robust_core.csv` is the reported
+*characterisation* of the network — the degree structure, the in-degree-of-zero result. The graph
+the forecasting stages actually read is the 20-edge top-3 adjacency in
 `CCM_09_adjacency_top3_diff_train.csv`, and the neural network reads a third object again, the
-residual-correlation matrix in `EDA Outputs/EDA_06_corr_residual.csv`, which stage 17 also
-reads for one of its comparison graphs. Feeding the robust core to
-GNARX will not reproduce the reported +8.4% or the 21st-percentile null result. Technical
-appendix §6.5.
+residual-correlation matrix in `EDA Outputs/EDA_06_corr_residual.csv`, which stage 17 also reads
+for one of its comparison graphs. Feeding the robust core to GNARX will not reproduce the
+reported +8.4% or the 21st-percentile null result. Technical appendix §6.5.
 
 **The evaluation window is fixed and is not the full record.** All model results use 1995-06 to
 2025-12 (367 months): 307 training months to 2020-12, then a 60-month test period. The exploratory
@@ -158,10 +164,12 @@ unrounded value differs in the second decimal. The reported figures use the roun
 throughout.
 
 **The ERA5 product is daily, the analysis is monthly, and potential evaporation is signed.** The
-reanalysis download is the post-processed daily statistics product, computed by the CDS at
+reanalysis download is the post-processed *daily* statistics product, computed by the CDS at
 retrieval time rather than served from an archive, so the request parameters in `docs/DATA.md`
 matter as much as the DOI. A daily-to-monthly reduction then sits between the download and every
-reported climate figure.
+reported climate figure. Potential evaporation enters as a positive magnitude: leaving ERA5's
+native negative sign in place gives Lake Turkana a water balance of roughly +2,386 mm/yr instead
+of the reported −1,820 mm/yr, and inverts the strongest empirical finding in the report.
 
 **The DMI lead lags are data-dependent, and the index is revised at source.** Stages 14 and 16
 read their seven per-lake lead lags from `CLIM_06_delta_leadlag.csv`, which stage 08 computes
@@ -169,8 +177,7 @@ from `Climate Indices/dmi.csv`. NOAA recomputes the Dipole Mode Index whenever t
 temperature dataset behind it is revised, and re-downloading it during this work moved two of the
 seven lags and every DMI-dependent number with them, while leaving every water-balance, network,
 neural and null-control result bit-identical. `dmi.csv` is committed here with its access date;
-work from the committed copy and the reported numbers reproduce exactly. Technical appendix §7.5.
-
+work from the committed copy and the reported numbers reproduce exactly. Technical appendix §8.8.
 
 **The neural point estimates come from stage 19, not stage 15.** Stage 15 produces a single run
 on seed triple (0,1,2), which ranks first of ten. The figures the report carries are the
@@ -189,7 +196,6 @@ indices: NOAA PSL. Full citations, versions and access dates in `docs/DATA.md`.
 
 ## Licence
 
-Code released under the MIT Licence (`LICENSE`). The derived products and the outputs in
-`Code Outputs/` are released under CC BY 4.0. Redistribution of the underlying source
-data is governed by each provider's own terms.
-
+Code released under the MIT Licence (`LICENSE`). The derived products and the reference outputs
+are released under CC BY 4.0. Redistribution of the underlying source data is governed by each
+provider's own terms.
