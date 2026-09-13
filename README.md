@@ -179,12 +179,8 @@ seven lags and every DMI-dependent number with them, while leaving every water-b
 neural and null-control result bit-identical. `dmi.csv` is committed here with its access date;
 work from the committed copy and the reported numbers reproduce exactly. Technical appendix §8.8.
 
-**The neural point estimates come from stage 19, not stage 15.** Stage 15 produces a single run
-on seed triple (0,1,2), which ranks first of ten. The figures the report carries are the
-ten-replicate means from `FC10_seed_summary.csv`. A reproducer who runs stage 15 and compares it
-against the reported skill table will find a mismatch that is not an error.
 
-Full list of known deviations and non-determinism: technical appendix §7.
+Full list of known deviations and non-determinism: technical appendix §8.
 
 ---
 
