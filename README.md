@@ -36,7 +36,7 @@ Code Outputs/          NOT committed. Every stage writes here; created on the fi
 Reference Outputs/     committed supporting material — the authors' own results,
                        in the same subfolder layout as Code Outputs/
 
-docs/                  technical appendix, pipeline schematic, data instructions
+docs/                  technical appendix, data instructions
 environment.yml        the conda environment as used
 requirements.txt       equivalent pip pins
 ```
