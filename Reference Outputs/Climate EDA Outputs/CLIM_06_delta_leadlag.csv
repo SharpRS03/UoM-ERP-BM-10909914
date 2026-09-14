@@ -1,0 +1,8 @@
+Lake,precip_lag0,precip_peak_lag,precip_peak_corr,wb_lag0,wb_peak_lag,wb_peak_corr,DMI_peak_lag,DMI_peak_corr,Nino34_peak_lag,Nino34_peak_corr
+Lake Albert,0.248,1,0.349,0.26,1,0.351,3,0.269,5,0.212
+Lake Edward,0.283,0,0.283,0.293,0,0.293,6,0.122,12,-0.154
+Lake Kivu,0.251,1,0.329,0.26,1,0.332,5,0.148,1,0.151
+Lake Malawi,0.386,1,0.551,0.382,1,0.536,3,0.184,11,-0.144
+Lake Tanganyika,0.357,1,0.556,0.355,1,0.542,4,0.364,1,0.257
+Lake Turkana,0.325,1,0.441,0.359,1,0.445,11,0.199,6,0.173
+Lake Victoria,0.543,1,0.729,0.566,1,0.722,2,0.38,1,0.308
