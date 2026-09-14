@@ -93,9 +93,7 @@ responsible for any use made of the information.
 
 **Work from the committed files.** NOAA recomputes the Dipole Mode Index whenever the sea-surface
 temperature dataset behind it is revised, and the seven per-lake DMI lead lags are read from it at
-run time by stages 14 and 16. Re-downloading it during this work moved two of the seven lags and
-every DMI-dependent number with them. The committed vintage is part of the specification;
-appendix §8.5.
+run time by stages 14 and 16. Re-downloading it could affect the results.
 
 Both indices are used: DMI is carried into the models, Niño 3.4 is retained because the choice
 between them is made empirically and the comparison is reported.
