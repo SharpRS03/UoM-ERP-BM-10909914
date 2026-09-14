@@ -98,16 +98,6 @@ BLAS thread-count variables to 1 before importing NumPy, and `forecast_gnarx.py`
 The three neural stages — `15`, `18` and `19` — do not, which is one reason they are the least
 portable stages in the pipeline. Leave the pinning that is there in place.
 
-Two environment variables affect the run and both should be left unset:
-
-- **`AGL_ROOT`** — stages `09`, `10`, `11`, `14`, `16`, `17`, `18`, `19`, `20` and `21` read it as an
-  optional project root and fall back to the working directory. The other thirteen stages use plain
-  relative paths. Set it, and part of the run reads one tree while the rest reads another, with no
-  error.
-- **`GNN_SMOKE`, `N_NULL`, `N_REP`** — smoke-test and trial-count overrides in stages `18` and `19`.
-  Smoke mode writes its outputs under a `_SMOKE` suffix, so it cannot silently corrupt a real run,
-  but the real files will simply not be produced.
-
 Stage `22` needs `cartopy` and downloads Natural Earth shapefiles the first time it runs, so it
 needs a network connection. Nothing else in the pipeline does.
 
@@ -146,7 +136,7 @@ Copy the whole set rather than picking files out. The two that matter most are
 `Gap Interpolation Outputs/Unified_Interpolated_Levels.xlsx` and
 `Climate Data Extraction Outputs/Lake_Climate_Monthly.xlsx`.
 
-Three ordering constraints are worth knowing before you start:
+Three ordering constraints are worth knowing:
 
 - **Stage `11` is a hard dependency of `12`, `13`, `14`, `16` and `17`.** It writes
   `Baseline Outputs/Baseline_predictions.csv`, from which every later stage loads the 3,108
@@ -165,7 +155,7 @@ Three ordering constraints are worth knowing before you start:
   comes from it. It skips any metrics file it cannot find rather than failing, so an out-of-order
   run fails quietly.
 
-Full stage table: `docs/TECHNICAL_APPENDIX.pdf` §5. Every fixed parameter: §6.
+Full stage table: `docs/TECHNICAL_APPENDIX.pdf` §5. Fixed parameters: §6.
 
 ---
 
@@ -204,8 +194,6 @@ temperature dataset behind it is revised, and re-downloading could affect the re
 `dmi.csv` is committed here with its access date;
 work from the committed copy and the reported numbers reproduce exactly. Technical appendix §8.5.
 
-
-Full list of known deviations and non-determinism: technical appendix §8.
 
 ---
 
