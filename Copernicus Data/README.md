@@ -32,6 +32,6 @@ together. Stage 05 detects this and extracts it, so nothing needs unpacking by h
 ## Sources
 
 Full sources, exact request parameters and access dates: `docs/DATA.md` and
-`docs/TECHNICAL_APPENDIX.pdf` §3. The ERA5 daily product is computed by the CDS at retrieval time
+`docs/TECHNICAL_APPENDIX.pdf`. The ERA5 daily product is computed by the CDS at retrieval time
 rather than served from an archive, so the request parameters matter as much as the DOI —
 reproduce them field by field from appendix Table T 4.
