@@ -1,15 +1,28 @@
 # Python 3.13.9
+#
+# Equivalent pip pins. environment.yml is the specification the reported results were
+# produced under; this file is for anyone without conda.
+#
 
 numpy==2.3.5
 pandas==2.3.3
 scipy==1.16.3
 statsmodels==0.14.5
-scikit-learn==1.7.2
+scikit-learn==1.7.2      # present in the environment as recorded; no stage imports it
 xarray==2026.4.0
 netCDF4==1.7.4
 matplotlib==3.10.6
+seaborn==0.13.3
 openpyxl==3.1.5
 torch==2.10.0
 jupyter==1.1.1
 jupyterlab==4.4.7
 nbconvert==7.16.6
+
+# Stage 22 only (the study area map). Downloads Natural Earth shapefiles on first run.
+cartopy==0.25.0
+
+# Stage 04 only (the CDS API client). Needs a ~/.cdsapirc file holding your own CDS
+# API url and key, or the stage raises on cdsapi.Client(). Not needed at all if you
+# start from the committed derived products in Reference Outputs/.
+cdsapi==0.7.7
