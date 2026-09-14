@@ -1,0 +1,22 @@
+Lake_x,Lake_y,peak_lag_m,peak_ccf,lead
+Lake Albert,Lake Edward,0,0.228,contemporaneous
+Lake Albert,Lake Kivu,24,0.125,Lake Albert
+Lake Albert,Lake Malawi,-24,-0.257,Lake Malawi
+Lake Albert,Lake Tanganyika,-7,0.189,Lake Tanganyika
+Lake Albert,Lake Turkana,-1,0.302,Lake Turkana
+Lake Albert,Lake Victoria,0,0.281,contemporaneous
+Lake Edward,Lake Kivu,1,0.281,Lake Edward
+Lake Edward,Lake Malawi,16,0.231,Lake Edward
+Lake Edward,Lake Tanganyika,-16,-0.209,Lake Tanganyika
+Lake Edward,Lake Turkana,0,0.234,contemporaneous
+Lake Edward,Lake Victoria,1,0.291,Lake Edward
+Lake Kivu,Lake Malawi,0,0.211,contemporaneous
+Lake Kivu,Lake Tanganyika,0,0.284,contemporaneous
+Lake Kivu,Lake Turkana,0,0.251,contemporaneous
+Lake Kivu,Lake Victoria,0,0.43,contemporaneous
+Lake Malawi,Lake Tanganyika,0,0.192,contemporaneous
+Lake Malawi,Lake Turkana,8,0.165,Lake Malawi
+Lake Malawi,Lake Victoria,0,0.276,contemporaneous
+Lake Tanganyika,Lake Turkana,0,0.254,contemporaneous
+Lake Tanganyika,Lake Victoria,0,0.456,contemporaneous
+Lake Turkana,Lake Victoria,0,0.397,contemporaneous
