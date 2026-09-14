@@ -1,0 +1,8 @@
+,out_degree,in_degree,net_out_minus_in
+Lake Albert,3,2,1
+Lake Edward,1,2,-1
+Lake Kivu,2,3,-1
+Lake Malawi,1,2,-1
+Lake Tanganyika,5,5,0
+Lake Turkana,2,0,2
+Lake Victoria,5,5,0
