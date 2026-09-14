@@ -6,6 +6,9 @@
 # Channel order matters: xarray came from conda-forge, everything else from the
 # Anaconda default channel.
 #
+# Convergent Cross Mapping is implemented for this project in ccm_core.py. No external
+# CCM package (pyEDM, rEDM) is used or required, and none is installed here.
+#
 
 name: aglakes
 
@@ -19,9 +22,11 @@ dependencies:
   - pandas=2.3.3
   - scipy=1.16.3
   - statsmodels=0.14.5
+  # Present in the environment as recorded; no stage imports it.
   - scikit-learn=1.7.2
   - netcdf4=1.7.4
   - matplotlib=3.10.6
+  - seaborn=0.13.3
   - openpyxl=3.1.5
   - jupyter=1.1.1
   - jupyterlab=4.4.7
@@ -32,3 +37,10 @@ dependencies:
   # the neural network's seed sensitivity.
   - pytorch=2.10.0
   - conda-forge::xarray=2026.4.0
+  # Stage 22 only (the study area map). Downloads Natural Earth shapefiles on first run,
+  # so that stage needs network access; nothing else in the pipeline does.
+  - conda-forge::cartopy=0.25.0
+  # Stage 04 only (the CDS API client). Needs a ~/.cdsapirc file holding your own CDS
+  # API url and key, or the stage raises on cdsapi.Client(). Not needed at all if you
+  # start from the committed derived products in Reference Outputs/.
+  - conda-forge::cdsapi=0.7.7
