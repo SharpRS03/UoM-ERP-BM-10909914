@@ -1,0 +1,8 @@
+Lake,Span_months,Observed,Interpolated,Pct_interpolated,Longest_interp_run_m,Still_missing
+Lake Albert,370,355,15,4.1,1,0
+Lake Edward,371,330,41,11.1,6,0
+Lake Kivu,371,317,54,14.6,4,0
+Lake Malawi,403,403,0,0.0,0,0
+Lake Tanganyika,401,401,0,0.0,0,0
+Lake Turkana,402,401,1,0.2,1,0
+Lake Victoria,402,402,0,0.0,0,0
