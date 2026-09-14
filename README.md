@@ -195,7 +195,7 @@ retrieval time rather than served from an archive, so the request parameters in 
 matter as much as the DOI. A daily-to-monthly reduction then sits between the download and every
 reported climate figure. Potential evaporation enters as a positive magnitude: leaving ERA5's
 native negative sign in place gives Lake Turkana a water balance of roughly +2,386 mm/yr instead
-of the reported −1,820 mm/yr, and inverts the strongest empirical finding in the report.
+of the reported −1,820 mm/yr.
 
 **The DMI lead lags are data-dependent, and the index is revised at source.** Stages 14 and 16
 read their seven per-lake lead lags from `CLIM_06_delta_leadlag.csv`, which stage 08 computes
