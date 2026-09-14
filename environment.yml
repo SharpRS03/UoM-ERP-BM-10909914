@@ -32,9 +32,7 @@ dependencies:
   - jupyterlab=4.4.7
   - nbconvert=7.16.6
   # PyTorch: CPU-only OpenBLAS build on Apple Silicon (arm64). No CUDA, no Metal.
-  # The exact build used was cpu_openblas_py313h355ee32_1. Linear algebra backend and
-  # thread count both affect floating-point summation order, which is the mechanism behind
-  # the neural network's seed sensitivity.
+  # The exact build used was cpu_openblas_py313h355ee32_1. 
   - pytorch=2.10.0
   - conda-forge::xarray=2026.4.0
   # Stage 22 only (the study area map). Downloads Natural Earth shapefiles on first run,
