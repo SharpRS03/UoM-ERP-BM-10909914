@@ -1,0 +1,15 @@
+Lake,Source,Overlap_months,Median_offset_m,Offset_std_m,Overlap_corr
+Lake Albert,GREALM,106,-1.495,0.096,0.997
+Lake Albert,DAHITI,237,2.128,0.112,0.995
+Lake Edward,GREALM,106,-2.23,0.048,0.992
+Lake Edward,DAHITI,226,0.495,0.111,0.963
+Lake Kivu,GREALM,103,0.535,0.044,0.992
+Lake Kivu,DAHITI,187,0.018,0.05,0.992
+Lake Malawi,GREALM,384,0.563,0.246,0.941
+Lake Malawi,DAHITI,0,,,
+Lake Tanganyika,GREALM,386,0.158,0.245,0.964
+Lake Tanganyika,DAHITI,379,1.676,0.268,0.95
+Lake Turkana,GREALM,385,0.43,0.051,1.0
+Lake Turkana,DAHITI,0,,,
+Lake Victoria,GREALM,386,0.478,0.12,0.982
+Lake Victoria,DAHITI,385,-0.097,0.137,0.975
